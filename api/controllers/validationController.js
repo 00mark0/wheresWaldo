@@ -3,11 +3,11 @@ const prisma = new PrismaClient();
 
 export const validateClick = async (req, res) => {
   const { imageId, x, y } = req.body;
-  const tolerance = 20; // Define a tolerance area (e.g., 20 pixels)
+  const tolerance = 50; // Increase the tolerance area to 50 pixels
 
   try {
     const characters = await prisma.character.findMany({
-      where: { imageId },
+      where: { imageId: parseInt(imageId) },
       include: { coordinates: true },
     });
 
@@ -17,6 +17,7 @@ export const validateClick = async (req, res) => {
         const distance = Math.sqrt(
           Math.pow(coordinate.x - x, 2) + Math.pow(coordinate.y - y, 2)
         );
+        console.log(`Character: ${character.name}, Distance: ${distance}`);
         if (distance <= tolerance) {
           return res
             .status(200)

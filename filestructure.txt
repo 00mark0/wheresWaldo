@@ -40,7 +40,14 @@
         |-- App.jsx
         |-- api
             |-- axios.js
+        |-- components
+            |-- CharacterMarker.jsx
+            |-- ImageCard.jsx
+            |-- TargetBox.jsx
         |-- index.css
         |-- main.jsx
+        |-- pages
+            |-- MenuPage.jsx
+            |-- PlayPage.jsx
     |-- tailwind.config.js
     |-- vite.config.js

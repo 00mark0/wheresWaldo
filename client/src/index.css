@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.menu-page {
+  text-align: center;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-card {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.image-card img {
+  width: 200px;
+  height: auto;
+}
+
+.play-page {
+  position: relative;
+  text-align: center;
+}
+
+.play-page img {
+  width: 100%;
+  height: auto;
+}
+
+.character-marker {
+  background-color: yellow;
+  border: 1px solid black;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+.target-box {
+  position: absolute;
+  border: 2px solid red;
+  padding: 10px;
+  background-color: white;
+}
