@@ -47,6 +47,7 @@
         |-- index.css
         |-- main.jsx
         |-- pages
+            |-- DashboardPage.jsx
             |-- MenuPage.jsx
             |-- PlayPage.jsx
     |-- tailwind.config.js
