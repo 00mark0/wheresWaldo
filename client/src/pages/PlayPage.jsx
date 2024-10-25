@@ -17,6 +17,7 @@ const PlayPage = () => {
   const [markers, setMarkers] = useState([]);
   const [foundCharacters, setFoundCharacters] = useState([]);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
   const imageRef = useRef(null);
 
   const fetchImageDetails = useCallback(async () => {
@@ -109,6 +110,30 @@ const PlayPage = () => {
     }, 2000); // Adjust the delay as needed
   };
 
+  const handleZoomIn = () => {
+    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 7));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 1));
+  };
+
+  const handleResetZoom = () => {
+    setZoomLevel(1);
+  };
+
+  const handleResetGame = () => {
+    setScoreSubmitted(false);
+    setClickCoordinates(null);
+    setFeedback("");
+    setStartTime(null);
+    setEndTime(null);
+    setName("");
+    setMarkers([]);
+    setFoundCharacters([]);
+    fetchImageDetails();
+  };
+
   return (
     <div className="container mx-auto py-8">
       <div className="flex justify-between mb-8">
@@ -125,6 +150,33 @@ const PlayPage = () => {
           View Dashboard
         </button>
       </div>
+      <div className="flex justify-between mb-8">
+        <button
+          onClick={handleZoomOut}
+          className="p-2 bg-gray-500 text-white rounded"
+          disabled={zoomLevel <= 1}
+        >
+          Zoom Out
+        </button>
+        <button
+          onClick={handleZoomIn}
+          className="p-2 bg-gray-500 text-white rounded"
+        >
+          Zoom In
+        </button>
+        <button
+          onClick={handleResetZoom}
+          className="p-2 bg-gray-500 text-white rounded"
+        >
+          Reset Zoom
+        </button>
+        <button
+          onClick={handleResetGame}
+          className="p-2 bg-red-500 text-white rounded"
+        >
+          Reset Game
+        </button>
+      </div>
       <h1 className="text-4xl font-bold text-center mb-8">
         Where&apos;s Waldo
       </h1>
@@ -132,7 +184,13 @@ const PlayPage = () => {
         <p className="text-center mt-4 text-lg font-semibold">{feedback}</p>
       )}
       {image && (
-        <div className="relative">
+        <div
+          className="relative"
+          style={{
+            transform: `scale(${zoomLevel})`,
+            transformOrigin: "top left",
+          }}
+        >
           <img
             ref={imageRef}
             src={image.url}
