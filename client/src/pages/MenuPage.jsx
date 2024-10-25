@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import ImageCard from "../components/ImageCard";
+import "../App.css";
 
 const MenuPage = () => {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchImages = async () => {
       const response = await axios.get("/images");
       setImages(response.data);
+      setLoading(false);
     };
 
     fetchImages();
@@ -37,11 +40,17 @@ const MenuPage = () => {
       >
         View Dashboard
       </button>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {images.map((image, index) => (
-          <ImageCard key={image.id} image={image} name={imageNames[index]} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {images.map((image, index) => (
+            <ImageCard key={image.id} image={image} name={imageNames[index]} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

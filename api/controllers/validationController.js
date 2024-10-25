@@ -17,7 +17,6 @@ export const validateClick = async (req, res) => {
         const distance = Math.sqrt(
           Math.pow(coordinate.x - x, 2) + Math.pow(coordinate.y - y, 2)
         );
-        console.log(`Character: ${character.name}, Distance: ${distance}`);
         if (distance <= tolerance) {
           return res
             .status(200)

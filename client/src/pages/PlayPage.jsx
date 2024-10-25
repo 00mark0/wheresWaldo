@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import CharacterMarker from "../components/CharacterMarker";
+import "../App.css";
 
 const PlayPage = () => {
   const { imageId } = useParams();
@@ -18,6 +19,7 @@ const PlayPage = () => {
   const [foundCharacters, setFoundCharacters] = useState([]);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [loading, setLoading] = useState(true);
   const imageRef = useRef(null);
 
   const fetchImageDetails = useCallback(async () => {
@@ -32,6 +34,7 @@ const PlayPage = () => {
       });
       setCharacters(response.data.characters);
       setStartTime(Date.now());
+      setLoading(false);
     };
   }, [imageId]);
 
@@ -180,54 +183,68 @@ const PlayPage = () => {
       <h1 className="text-4xl font-bold text-center mb-8">
         Where&apos;s Waldo
       </h1>
+      <p className="text-center mb-2">
+        Hint: When looking for Woof the Dog, look for his striped tail. Usually
+        only his tail is visible in the images.
+      </p>
       {feedback && (
         <p className="text-center mt-4 text-lg font-semibold">{feedback}</p>
       )}
-      {image && (
-        <div
-          className="relative"
-          style={{
-            transform: `scale(${zoomLevel})`,
-            transformOrigin: "top left",
-          }}
-        >
-          <img
-            ref={imageRef}
-            src={image.url}
-            alt="Game"
-            onClick={handleClick}
-            className="w-full h-auto"
-            style={{ cursor: "crosshair" }}
-          />
-          {markers.map((marker, index) => (
-            <CharacterMarker
-              key={index}
-              x={marker.x}
-              y={marker.y}
-              imageWidth={image.width}
-              imageHeight={image.height}
-              name={marker.name}
-            />
-          ))}
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
         </div>
-      )}
-      {foundCharacters.length === characters.length && !scoreSubmitted && (
-        <div className="text-center mt-4">
-          <p>Your time: {Math.floor((endTime - startTime) / 1000)} seconds</p>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
-            className="border p-2 rounded"
-          />
-          <button
-            onClick={handleNameSubmit}
-            className="ml-2 p-2 bg-blue-500 text-white rounded"
-          >
-            Submit
-          </button>
-        </div>
+      ) : (
+        <>
+          {foundCharacters.length === characters.length && !scoreSubmitted && (
+            <div className="text-center mt-4">
+              <p>
+                Your time: {Math.floor((endTime - startTime) / 1000)} seconds
+              </p>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                className="border p-2 rounded"
+              />
+              <button
+                onClick={handleNameSubmit}
+                className="ml-2 p-2 bg-blue-500 text-white rounded"
+              >
+                Submit
+              </button>
+            </div>
+          )}
+          {image && (
+            <div
+              className="relative"
+              style={{
+                transform: `scale(${zoomLevel})`,
+                transformOrigin: "top left",
+              }}
+            >
+              <img
+                ref={imageRef}
+                src={image.url}
+                alt="Game"
+                onClick={handleClick}
+                className="w-full h-auto"
+                style={{ cursor: "crosshair" }}
+              />
+              {markers.map((marker, index) => (
+                <CharacterMarker
+                  key={index}
+                  x={marker.x}
+                  y={marker.y}
+                  imageWidth={image.width}
+                  imageHeight={image.height}
+                  name={marker.name}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
