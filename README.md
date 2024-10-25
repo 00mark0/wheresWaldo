@@ -26,53 +26,12 @@ Welcome to the "Where's Waldo" game! This project is a web-based game where play
 
 ### Installation
 
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/yourusername/wheres-waldo.git
-   cd wheres-waldo
-   ```
-
-Sure! Here is a sample
-
-README.md
-
-for your project:
-
-````markdown
-# Where's Waldo Game
-
-Welcome to the "Where's Waldo" game! This project is a web-based game where players can search for characters hidden in various images. The game includes features such as zooming, panning, and tracking scores.
-
-## Features
-
-- **Image Selection**: Choose from a variety of images to play the game.
-- **Zoom and Pan**: Zoom in and out of the image and drag to pan for better navigation.
-- **Character Detection**: Click on the image to find hidden characters.
-- **Score Tracking**: Track and save your scores, and view the leaderboard.
-- **Responsive Design**: The game is designed to be responsive and works on various screen sizes.
-
-## Technologies Used
-
-- **Frontend**: React, Tailwind CSS
-- **Backend**: Node.js, Express
-- **Database**: PostgreSQL
-- **API**: Axios for making HTTP requests
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js and npm installed
-- PostgreSQL installed and running
-
-### Installation
-
 1. **Fork and Clone the repository**:
+
    ```sh
    git clone https://github.com/yourusername/wheres-waldo.git
    cd wheres-waldo
    ```
-````
 
 2. **Install dependencies**:
 
