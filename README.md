@@ -64,7 +64,7 @@ Welcome to the "Where's Waldo" game! This project is a web-based game where play
    ```
 
 6. **Open the application**:
-   - Open your browser and navigate to `http://localhost:3000`.
+   - Open your browser and navigate to `http://localhost:5173`.
 
 ## Usage
 
