@@ -29,8 +29,8 @@ Welcome to the "Where's Waldo" game! This project is a web-based game where play
 1. **Fork and Clone the repository**:
 
    ```sh
-   git clone https://github.com/yourusername/wheres-waldo.git
-   cd wheres-waldo
+   git clone https://github.com/yourusername/wheresWaldo.git
+   cd wheresWaldo
    ```
 
 2. **Install dependencies**:
