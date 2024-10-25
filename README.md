@@ -108,7 +108,3 @@ If you have any questions or feedback, feel free to reach out:
 - GitHub: [00mark0](https://github.com/00mark0)
 
 Enjoy playing "Where's Waldo"!
-
-```
-
-```
